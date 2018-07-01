@@ -1,0 +1,94 @@
+@import "~compass-mixins/lib/compass";
+@import "~src/styles/functions";
+@import "~src/styles/variables";
+
+.feed-item {
+    margin-bottom: 2em;
+}
+
+.ms-feed__add {
+    margin-bottom: 3em;
+
+    textarea {
+        width: 100%;
+        border: none;
+        outline: none;
+        resize: none;
+        font-size: inherit;
+    }
+
+    .ms-add__hint {
+        padding-bottom: 1em;
+    }
+}
+
+.ms-feed__textarea {
+    font-size: 18px;
+    white-space: pre-line;
+
+    textarea {
+        width: 100%;
+        border: none;
+        outline: none;
+        resize: none;
+        font-size: inherit;
+    }
+}
+
+.ms-add__hint {
+    color: $grey;
+    font-size: .9em;
+    padding: 1em 0 0;
+
+    &.error {
+        color: $red;
+
+        a {
+            cursor: pointer;
+            color: $primary;
+        }
+    }
+}
+
+.ms-add__buttons {
+    display: flex;
+
+    button {
+        font-size: 1em;
+
+        &:first-child {
+           margin-right: 10px;
+        }
+    }
+
+    i {
+        margin-right: 5px;
+    }
+}
+
+.ms-feed__controls {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    .fa {
+        @include opacity(.3);
+        font-size: 1.5em;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            @include opacity(.7);
+        }
+    }
+}
+
+.ms-feed {
+    h2 {
+        margin: 0 0 1.5em;
+    }
+}

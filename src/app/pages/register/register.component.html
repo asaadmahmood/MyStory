@@ -1,0 +1,62 @@
+<div class="floating__wrapper">
+  <div class="app__logo">
+    <a routerLink='/'>MyStory</a>
+  </div>
+  <mat-card class="floating-box">
+    <h1>Register</h1>
+
+
+    <form (ngSubmit)="registerUser(registerForm)" #registerForm="ngForm">
+      <div class="floating-box__row">
+        <mat-form-field class="full-width">
+          <input (ngModelChange)="dismissError()" type="text" matInput placeholder="First name" required ngModel name="firstName">
+        </mat-form-field>
+      </div>
+
+      <div class="floating-box__row">
+        <mat-form-field class="full-width">
+          <input (ngModelChange)="dismissError()" type="text" matInput placeholder="Last name" required ngModel name="lastName">
+        </mat-form-field>
+      </div>
+
+      <div class="floating-box__row">
+        <mat-form-field class="full-width">
+          <input (ngModelChange)="dismissError()" type="text" matInput placeholder="Username" required ngModel name="username">
+        </mat-form-field>
+      </div>
+
+      <div class="floating-box__row">
+        <mat-form-field class="full-width">
+          <input (ngModelChange)="dismissError()" type="email" matInput placeholder="Email" required ngModel name="email">
+        </mat-form-field>
+      </div>
+
+      <div class="floating-box__row">
+        <mat-form-field class="full-width">
+          <input (ngModelChange)="dismissError()" type="password" matInput placeholder="Password" required ngModel name="password">
+        </mat-form-field>
+      </div>
+
+      <div class="floating-box__row">
+        <input type="submit" class="btn btn--primary btn--full" value="Register">
+      </div>
+    </form>
+
+    <div class="floating-box__row" *ngIf="errorFlag">
+      <div class="floating-box__error">
+        {{errorMsg}}
+      </div>
+    </div>
+
+    <div class="floating-box__row floating-box__alt">
+      <div>
+        Already have an account?
+      </div>
+      <a routerLink="/login">
+        <input type="button" class="btn btn--transparent" value="Get Started!">
+      </a>
+    </div>
+
+  </mat-card>
+
+</div>

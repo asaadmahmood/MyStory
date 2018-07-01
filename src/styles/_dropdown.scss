@@ -1,0 +1,38 @@
+@import "~compass-mixins/lib/compass";
+@import "~src/styles/functions";
+@import "~src/styles/variables";
+
+.ms-dropdown {
+    @include single-transition(all, .25s);
+    @include border-radius($border-rad);
+    @include box-shadow($dropdown-shadow);
+    @include translateY(0);
+    background: white;
+    position: absolute;
+    right: 5px;
+    top: 45px;
+    z-index: 5;
+
+    a {
+        border-top: 1px solid $divider-color;
+        color: gray;
+        display: block;
+        padding: 10px 40px 10px 20px;
+        text-decoration: none;
+        font-size: .9em;
+        white-space: nowrap;
+
+        i {
+            @include opacity(.7);
+            margin-right: 5px;
+        }
+
+        &:first-child {
+            border: none;
+        }
+
+        &:hover {
+            background: $item-hover-bg;
+        }
+    }
+}

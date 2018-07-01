@@ -1,0 +1,19 @@
+<mat-card class="sidebar">
+  <div class="sidebar__item" [ngClass]="{'active': viewState == 'public'}" (click)="changeView('public')">
+    <i class="fa fa-globe"></i>Public Posts
+  </div>
+  <div class="sidebar__item" [ngClass]="{'active': viewState == 'user'}" (click)="changeView('user')">
+      <i class="fa fa-user"></i>Your Public Posts
+  </div>
+  <div class="sidebar__item" [ngClass]="{'active': viewState == 'private'}" (click)="changeView('private')">
+      <i class="fa fa-lock"></i>Your Private Posts
+  </div>
+</mat-card>
+<br>
+<h3>Users</h3>
+
+<div class="user-image__list">
+<div *ngFor="let user of userList" class="user-image">
+  <img src="{{user.profilePic}}" width="50px" alt="{{user.username}}'s image" matTooltip="{{user.firstName}} {{user.lastName}}">
+</div>
+</div>

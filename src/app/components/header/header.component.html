@@ -1,0 +1,19 @@
+<header>
+  <div class="container">
+    <div class="header__logo">
+      <a routerLink='/'>MyStory</a>
+    </div>
+    <div class="header__links" *ngIf="!currentUser">
+      <a routerLink='/login'>Login</a> |
+      <a routerLink='/register'>Register</a>
+    </div>
+    <div class="header__links header__user" *ngIf="currentUser" mat-button [matMenuTriggerFor]="menu">
+      <img src="{{currentUser.profilePic}}" width="30px" alt="{{currentUser.username}}'s image"> {{currentUser.username}}
+      <i class="fa fa-chevron-down"></i>
+    </div>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink='/profile'>Edit Profile</button>
+        <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </div>
+</header>

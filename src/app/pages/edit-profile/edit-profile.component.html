@@ -1,0 +1,42 @@
+<div class="floating__wrapper">
+  <div class="app__logo">
+    <a routerLink='/'>MyStory</a>
+  </div>
+  <mat-card class="floating-box">
+    <h1>Edit Profile</h1>
+    <div class="floating-box__row">
+      <input type="text" (ngModelChange)="dismissError()" (keyup.enter)="updateCurrentUser()" class="ms-input" placeholder="First name"
+        [(ngModel)]="currentUser.firstName">
+    </div>
+    <div class="floating-box__row">
+      <input type="text" (ngModelChange)="dismissError()" (keyup.enter)="updateCurrentUser()" class="ms-input" placeholder="Last name"
+        [(ngModel)]="currentUser.lastName">
+    </div>
+    <div class="floating-box__row">
+      <input type="text" (ngModelChange)="dismissError()" (keyup.enter)="updateCurrentUser()" class="ms-input" placeholder="Username"
+        [(ngModel)]="currentUser.username">
+    </div>
+    <div class="floating-box__row">
+      <input type="text" (ngModelChange)="dismissError()" (keyup.enter)="updateCurrentUser()" class="ms-input" placeholder="Email" [(ngModel)]="currentUser.email">
+    </div>
+    <!-- <div class="floating-box__row">
+      <input type="password" (ngModelChange)="dismissError()" (keyup.enter)="updateCurrentUser()" class="ms-input" placeholder="Password"
+        [(ngModel)]="currentUser.password">
+    </div> -->
+    <div class="floating-box__row text-left">
+      <input type="button" class="btn btn--primary btn--full" (click)="updateCurrentUser()" value="Update">
+    </div>
+
+    <div class="floating-box__row" *ngIf="errorFlag">
+      <div class="floating-box__error">
+        {{errorMsg}}
+      </div>
+    </div>
+
+    <div class="floating-box__row floating-box__alt">
+      <div>Do you want to leave MyStory?</div>
+      <input type="button" class="btn btn--transparent btn--danger btn--full" (click)="deleteUser()" value="Delete Account">
+    </div>
+
+  </mat-card>
+</div>

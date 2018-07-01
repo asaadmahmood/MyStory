@@ -1,0 +1,133 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~compass-mixins/lib/compass";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+@import "~src/styles/palette";
+@import "~src/styles/functions";
+@import "~src/styles/variables";
+@import "~src/styles/animate";
+@import "~src/styles/feed-item";
+@import "~src/styles/dropdown";
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,500');
+
+* {
+    @include box-sizing(border-box);
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    background: #fafafa;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+}
+
+// Base styles
+
+.container {
+    position: relative;
+    max-width: 1170px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+.btn {
+    @include single-transition(all, .25s);
+    @include border-radius($border-rad);
+    padding: 11px 18px;
+    cursor: pointer;
+    font-size: .9em;
+    border: none;
+    text-align: center;
+
+    &.btn--full {
+        width: 100%;
+    }
+
+    &.btn--primary {
+        background: $primary;
+        color: white;
+
+        &:hover {
+            background: darken($primary, 5%);
+        }
+    }
+
+    &.btn--transparent {
+        border: 1px solid $primary;
+        color: $primary;
+
+        &.btn--danger {
+            border-color: $red;
+            color: $red;
+
+            &:hover {
+                background: alpha-color($red, .05%);
+            }
+        }
+
+        &:hover {
+            background: alpha-color($primary, .05%);
+        }
+    }
+}
+
+.ms-input {
+    @include single-transition(all, .25s);
+    @include border-radius($border-rad);
+    padding: .9em 2em;
+    font-size: .9em;
+    outline: none;
+    border: 1px solid #ddd;
+    width: 100%;
+
+    &:focus {
+        border-color: $primary;
+    }
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.app__logo {
+    @include text-shadow(0 2px 1px alpha-color(black, .4));
+    color: white;
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+    margin: 3em 0 1.5em;
+}
+
+.light {
+    font-weight: 300;
+}
+
+.mat-form-field-infix {
+    font-size: .95em;
+}
+
+.mat-card {
+    font-family: inherit;
+}
+
+.mat-simple-snackbar-action button {
+    text-align: right;
+}

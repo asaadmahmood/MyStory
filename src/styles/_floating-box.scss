@@ -1,0 +1,51 @@
+@import "~compass-mixins/lib/compass";
+@import "~src/styles/functions";
+@import "~src/styles/variables";
+
+.floating__wrapper {
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: $primary;
+    overflow: auto;
+    padding-bottom: 50px;
+}
+
+.floating-box {
+    max-width: 450px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 3em 4em 2.5em;
+
+    .full-width {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 1.6em;
+        margin-bottom: 1em;
+        font-weight: normal;
+    }
+}
+
+.floating-box__row {
+    margin-bottom: 1em;
+}
+
+.floating-box__error {
+    color: $red;
+    font-size: .9em;
+}
+
+.floating-box__alt {
+    div {
+        @include opacity(.6);
+        font-size: .9em;
+        margin: 2.5em 0 1.2em;
+    }
+
+    a {
+        color: $primary;
+    }
+}

@@ -1,0 +1,13 @@
+.center-pane {
+    display: flex;
+    padding: 3em 0;
+
+    ms-sidebar {
+        flex: 1;
+        margin-right: 50px;
+    }
+
+    ms-feed {
+        flex: 3;
+    }
+}

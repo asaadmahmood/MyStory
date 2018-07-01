@@ -1,0 +1,43 @@
+@import "~compass-mixins/lib/compass";
+@import "~src/styles/functions";
+@import "~src/styles/variables";
+
+.sidebar {
+    padding: 0;
+}
+
+.sidebar__item {
+    cursor: pointer;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+
+    &:first-child {
+        border: none;
+    }
+
+    &:hover,
+    &.active {
+        color: $primary;
+
+        .fa {
+            color: inherit;
+        }
+    }
+
+    .fa {
+        color: $grey;
+        text-align: center;
+        width: 30px;
+        margin-right: 10px;
+    }
+}
+
+.user-image__list {
+    display: flex;
+}
+
+.user-image {
+    cursor: pointer;
+    position: relative;
+    margin-right: 10px;
+}

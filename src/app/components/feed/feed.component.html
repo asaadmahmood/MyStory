@@ -1,0 +1,163 @@
+<mat-card class="ms-feed__add" *ngIf="currentUser">
+  <div class="ms-feed__textarea">
+    <textarea placeholder="Add something to your story" (keyup.control.enter)="postPublicly()" [(ngModel)]="userPost" (ngModelChange)="messageFlag()"
+      rows="4"></textarea>
+  </div>
+  <div *ngIf="hasMessage" class="ms-add__hint animated short fadeIn">
+    Press control+enter to post publicly
+  </div>
+  <div *ngIf="hasMessage" class="ms-add__buttons animated short fadeIn">
+    <button class="btn btn--primary btn--full" (click)="postPublicly()">
+      <i class="fa fa-globe"></i>Post Publicly
+    </button>
+    <button class="btn btn--transparent btn--full" (click)="postPrivately()">
+      <i class="fa fa-lock"></i>Post Privately
+    </button>
+  </div>
+</mat-card>
+
+<div class="ms-feed" *ngIf="viewState == 'public'">
+  <h2>Public Posts</h2>
+  <div *ngIf="!publicPostCount">
+    <h4 class="light">There are no public posts yet.</h4>
+  </div>
+
+  <div *ngFor="let feedItem of msgList | reverse">
+    <mat-card class="feed-item"  *ngIf="feedItem.public && !feedItem.deleted">
+      <div *ngIf="currentUser && currentUser.email == feedItem.user">
+        <div class="ms-feed__controls">
+          <i class="fa fa-angle-down" mat-button [matMenuTriggerFor]="messageMenu"></i>
+          <mat-menu #messageMenu="matMenu">
+            <button mat-menu-item (click)="editPost(feedItem)">Edit Post</button>
+            <button mat-menu-item (click)="openDeleteDialog(feedItem)">Delete Post</button>
+          </mat-menu>
+        </div>
+      </div>
+
+      <div class="ms-feed__textarea" *ngIf="!feedItem.editing">
+        {{feedItem.message}}
+      </div>
+
+      <div class="ms-feed__textarea" *ngIf="feedItem.editing">
+        <textarea msFocus (ngModelChange)="editingChange(feedItem)" (keyup.escape)="stopEditing(feedItem)" placeholder="Edit story"
+          (keyup.control.enter)="savePost(feedItem)" [(ngModel)]="feedItem.message" rows="4"></textarea>
+      </div>
+
+      <div *ngIf="feedItem.editing && !deletePostFlag" class="ms-add__hint animated short fadeIn">
+        Press control+enter to save post and esc to stop editing.
+      </div>
+
+      <div *ngIf="feedItem.editing && deletePostFlag" class="ms-add__hint error animated short fadeIn">
+        You are trying to save an empty post. Would you like to remove this post instead?
+        <a (click)="deletePost(feedItem)">Yes</a>
+      </div>
+
+      <div class="ms-add__hint animated short fadeIn">
+        Posted by {{feedItem.firstName}} {{feedItem.lastName}} on {{feedItem.date | date: 'MMMM d'}}
+      </div>
+
+    </mat-card>
+  </div>
+</div>
+
+
+<div class="ms-feed" *ngIf="viewState == 'user'">
+  <h2>Your Public Posts</h2>
+  <div *ngIf="currentUser">
+
+    <div *ngIf="!userPublicPostCount">
+      <h4 class="light">You do not have any public posts yet.</h4>
+    </div>
+
+    <div *ngFor="let feedItem of msgList | reverse">
+      <mat-card class="feed-item" *ngIf="feedItem.public && !feedItem.deleted && currentUser.email == feedItem.user">
+
+        <div class="ms-feed__controls">
+          <i class="fa fa-angle-down" mat-button [matMenuTriggerFor]="messageMenu"></i>
+          <mat-menu #messageMenu="matMenu">
+            <button mat-menu-item (click)="editPost(feedItem)">Edit Post</button>
+            <button mat-menu-item (click)="openDeleteDialog(feedItem)">Delete Post</button>
+          </mat-menu>
+        </div>
+
+
+        <div class="ms-feed__textarea" *ngIf="!feedItem.editing">
+          {{feedItem.message}}
+        </div>
+
+        <div class="ms-feed__textarea" *ngIf="feedItem.editing">
+          <textarea msFocus (ngModelChange)="editingChange(feedItem)" (keyup.escape)="stopEditing(feedItem)" placeholder="Edit story"
+            (keyup.control.enter)="savePost(feedItem)" [(ngModel)]="feedItem.message" rows="4"></textarea>
+        </div>
+
+        <div *ngIf="feedItem.editing && !deletePostFlag" class="ms-add__hint animated short fadeIn">
+          Press control+enter to save post and esc to stop editing.
+        </div>
+
+        <div *ngIf="feedItem.editing && deletePostFlag" class="ms-add__hint error animated short fadeIn">
+          You are trying to save an empty post. Would you like to remove this post instead?
+          <a (click)="deletePost(feedItem)">Yes</a>
+        </div>
+
+        <div class="ms-add__hint animated short fadeIn">
+          Posted by {{feedItem.firstName}} {{feedItem.lastName}} on {{feedItem.date | date: 'medium'}}
+        </div>
+
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="!currentUser">
+    <h4 class="light">You need to login first to see your own posts.</h4>
+  </div>
+</div>
+
+
+<div class="ms-feed" *ngIf="viewState == 'private'">
+  <h2>Your Private Posts</h2>
+  <div *ngIf="currentUser">
+
+    <div *ngIf="!userPrivatePostCount">
+      <h4 class="light">You don't have any private posts yet.</h4>
+    </div>
+
+    <div *ngFor="let feedItem of msgList | reverse">
+      <mat-card class="feed-item" *ngIf="!feedItem.public && !feedItem.deleted && currentUser.email == feedItem.user">
+
+        <div class="ms-feed__controls">
+          <i class="fa fa-angle-down" mat-button [matMenuTriggerFor]="messageMenu"></i>
+          <mat-menu #messageMenu="matMenu">
+            <button mat-menu-item (click)="editPost(feedItem)">Edit Post</button>
+            <button mat-menu-item (click)="openDeleteDialog(feedItem)">Delete Post</button>
+          </mat-menu>
+        </div>
+
+
+        <div class="ms-feed__textarea" *ngIf="!feedItem.editing">
+          {{feedItem.message}}
+        </div>
+
+        <div class="ms-feed__textarea" *ngIf="feedItem.editing">
+          <textarea msFocus (ngModelChange)="editingChange(feedItem)" (keyup.escape)="stopEditing(feedItem)" placeholder="Edit story"
+            (keyup.control.enter)="savePost(feedItem)" [(ngModel)]="feedItem.message" rows="4"></textarea>
+        </div>
+
+        <div *ngIf="feedItem.editing && !deletePostFlag" class="ms-add__hint animated short fadeIn">
+          Press control+enter to save post and esc to stop editing.
+        </div>
+
+        <div *ngIf="feedItem.editing && deletePostFlag" class="ms-add__hint error animated short fadeIn">
+          You are trying to save an empty post. Would you like to remove this post instead?
+          <a (click)="deletePost(feedItem)">Yes</a>
+        </div>
+
+        <div class="ms-add__hint animated short fadeIn">
+          Posted by {{feedItem.firstName}} {{feedItem.lastName}} on {{feedItem.date | date: 'medium'}}
+        </div>
+
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="!currentUser">
+    <h4 class="light">You need to login first to see your own posts.</h4>
+  </div>
+</div>

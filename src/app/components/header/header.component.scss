@@ -1,0 +1,47 @@
+@import "~compass-mixins/lib/compass";
+@import "~src/styles/functions";
+@import "~src/styles/variables";
+
+header {
+    background: $primary;
+    color: white;
+
+    .container {
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+.header__logo {
+    @include text-shadow(0 2px 1px alpha-color(black, .4));
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.header__user {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+
+    img {
+        top: -2px;
+        position: relative;
+        margin-right: 5px;
+    }
+
+    .fa {
+        margin-left: 5px;
+        font-size: .8em;
+    }
+}
+
+mat-menu {
+    display: none;
+}
