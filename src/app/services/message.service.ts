@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { UserMsg } from '../interfaces/user-msg';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class MessageService {
   }
 
   getMessages() {
-    return this.http.get<{ message: UserMsg[] }>('http://localhost:3000/message')
+    return this.http.get<{ message: UserMsg[] }>(`${environment.apiBaseUrl}message`)
       .pipe(
         map((response) => {
           return response.message;
@@ -29,7 +30,7 @@ export class MessageService {
   }
 
   updateMessage(message: UserMsg) {
-    return this.http.post<{ message: UserMsg }>('http://localhost:3000/message/update', {
+    return this.http.post<{ message: UserMsg }>(`${environment.apiBaseUrl}message/update`, {
       message: message
     })
       .pipe(
@@ -40,7 +41,7 @@ export class MessageService {
   }
 
   addMessage(message: UserMsg) {
-    return this.http.post<{ message: UserMsg }>('http://localhost:3000/message', {
+    return this.http.post<{ message: UserMsg }>(`${environment.apiBaseUrl}message`, {
       message: message
     })
       .pipe(
@@ -51,7 +52,7 @@ export class MessageService {
   }
 
   deleteMessage(message: UserMsg) {
-    return this.http.post<{ message: UserMsg }>('http://localhost:3000/message/delete', {
+    return this.http.post<{ message: UserMsg }>(`${environment.apiBaseUrl}message/delete`, {
       message: message
     })
       .pipe(

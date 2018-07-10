@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
 import { User } from '../interfaces/api-user';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
   }
 
   login(credentials) {
-    return this.http.post<User>('http://localhost:3000/user/login', {
+    return this.http.post<User>(`${environment.apiBaseUrl}user/login`, {
       user: credentials
     })
     .pipe(
@@ -25,23 +26,23 @@ export class AuthService {
   }
 
   updateUser(credentials) {
-    return this.http.post<User>('http://localhost:3000/user/update', {
+    return this.http.post<User>(`${environment.apiBaseUrl}user/update`, {
       user: credentials
     });
   }
 
   deleteUser(credentials) {
-    return this.http.post<User>('http://localhost:3000/user/delete', {
+    return this.http.post<User>(`${environment.apiBaseUrl}user/delete`, {
       user: credentials
     });
   }
 
   getUsers() {
-    return this.http.get('http://localhost:3000/user/users/');
+    return this.http.get(`${environment.apiBaseUrl}user/users/`);
   }
 
   saveUser(credentials) {
-    return this.http.post<User>('http://localhost:3000/user/signup', {
+    return this.http.post<User>(`${environment.apiBaseUrl}user/signup`, {
       user: credentials
     })
     .pipe(
